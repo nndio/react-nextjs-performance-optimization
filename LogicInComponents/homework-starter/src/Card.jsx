@@ -3,47 +3,21 @@ import './Card.css';
 export const Card = ({
   id,
   title,
-  onTitleChange,
-  done,
-  onToggle,
-  onDelete,
+  imageUrl,
+  price, 
+  discount
 }) => {
-  const handleTitleChange = (event) => {
-    onTitleChange(id, event.target.value);
-  };
 
-  const handleCheckboxChange = () => {
-    onToggle(id);
-  };
+    return (
+    <article className="product-card">
+      <img className="product-card__image" src={imageUrl} alt={title} />
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onToggle(id);
-  };
+      <div className="product-card__price-container">
+        {price}
+      </div>
 
-  const handleTitleBlur = () => {
-    if (title === '') {
-      onDelete(id);
-    }
-  };
+      <h2 className="product-card__title">{title}</h2>
+    </article>
 
-  return (
-    <form className="card" onSubmit={handleSubmit}>
-      <input
-        className="card__done"
-        type="checkbox"
-        checked={done}
-        onChange={handleCheckboxChange}
-        tabIndex={-1}
-      />
-
-      <input
-        className="card__title"
-        type="text"
-        value={title}
-        onChange={handleTitleChange}
-        onBlur={handleTitleBlur}
-      />
-    </form>
   );
 };

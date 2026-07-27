@@ -1,25 +1,53 @@
-.card {
-  padding: 16px;
-  border-radius: 16px;
-  background-color: #eee;
+.product-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background-color: #fff;
+  border: solid 1px #ddd;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  min-height: 300px;
+}
+
+.product-card__image {
+  height: auto;
+  width: 100%;
+  border-radius: 10px;
+  object-fit: contain;
+  border: solid 1px #ddd;
+}
+
+.product-card__title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.product-card__price-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 8px;
-  transition: opacity 0.3s ease;
 }
 
-.card__title {
-  border: none;
-  background: none;
-  width: 100%;
-  font-size: 16px;
+.product-card__price {
+  font-size: 20px;
+  line-height: 24px;
+  color: #000;
+  font-weight: 600;
 }
 
-.card:has(.card__done:checked):not(:has(.card__title:focus)) {
-  opacity: 0.5;
+.product-card__price_with-discount {
+  color: #10c44c;
 }
 
-.card:has(.card__done:checked) > .card__title:not(:focus) {
+.product-card__price_without-discount {
+  font-size: 14px;
+  line-height: 20px;
   text-decoration: line-through;
+  color: #99a3ae;
+  font-weight: 400;
 }
