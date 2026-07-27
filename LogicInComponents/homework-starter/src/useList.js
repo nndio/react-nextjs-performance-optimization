@@ -1,3 +1,4 @@
+import { products } from "./products";
 export function useList() {
   /** Создать новый элемент. */
   const createItem = () => {};
@@ -23,6 +24,8 @@ export function useList() {
    * @param id - ID элемента.
    */
   const deleteItem = (id) => {};
+
+  const list = products;
 
   return {
     list,
