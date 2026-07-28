@@ -1,24 +1,24 @@
 import { Card } from './Card';
 import './CardList.css';
 
-export const CardList = ({ list }) => {
+export const CardList = ({
+  list,
+  onItemTitleChange,
+  onItemToggle,
+  onItemDelete,
+}) => {
   return (
-    <ul className="product-list">
-      {list.map(({ 
-        id,
-        title,
-        imageUrl,
-        price, 
-        discount
-       }) => {
+    <ul className="card-list">
+      {list.map(({ id, title, done }) => {
         return (
-          <li key={id} className="product-list__item">
+          <li key={id} className="card-list__item">
             <Card
               id={id}
               title={title}
-              imageUrl={imageUrl}
-              discount={discount}
-              price={price}
+              done={done}
+              onTitleChange={onItemTitleChange}
+              onToggle={onItemToggle}
+              onDelete={onItemDelete}
             />
           </li>
         );

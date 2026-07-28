@@ -1,13 +1,24 @@
 import { CardList } from './CardList';
-import { products } from "./products";
+import { useList } from './useList';
 import './App.css';
 
 export const App = () => {
-  const list = products;
+  const { list, createItem, setItemTitle, toggleItem, deleteItem } = useList();
 
   return (
     <div className="app">
-      <CardList list={list} />
+      <h1>Список покупок</h1>
+
+      <CardList
+        list={list}
+        onItemTitleChange={setItemTitle}
+        onItemToggle={toggleItem}
+        onItemDelete={deleteItem}
+      />
+
+      <button className="create-button" onClick={createItem}>
+        Новый элемент
+      </button>
     </div>
   );
 };
