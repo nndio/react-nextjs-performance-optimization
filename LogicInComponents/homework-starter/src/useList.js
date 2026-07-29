@@ -43,7 +43,16 @@ export function useList() {
    *
    * @param id - ID элемента.
    */
-  const toggleItem = (id) => {};
+  const toggleItem = (id) => {
+    setList((prevList) =>
+      prevList.map((item) =>
+        item.id === id
+          ? { ...item, done: !item.done }
+          : item
+      )
+    );
+    console.log(list);
+  };
 
   /**
    * Удалить элемент.
