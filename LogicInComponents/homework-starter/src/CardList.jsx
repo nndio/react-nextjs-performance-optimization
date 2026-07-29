@@ -6,6 +6,8 @@ export const CardList = ({
   onItemTitleChange,
   onItemToggle,
   onItemDelete,
+  focusId,
+  clearFocus
 }) => {
   return (
     <ul className="card-list">
@@ -19,6 +21,8 @@ export const CardList = ({
               onTitleChange={onItemTitleChange}
               onToggle={onItemToggle}
               onDelete={onItemDelete}
+              shouldFocus={id === focusId}
+              clearFocus={clearFocus}
             />
           </li>
         );

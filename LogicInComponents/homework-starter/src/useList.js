@@ -19,15 +19,20 @@ export function useList() {
     },
   ]);
 
+  const [focusId, setFocusId] = useState(null);
+
   /** Создать новый элемент. */
   const createItem = () => {
+    const id = String(Date.now());
     const newItem = {
-      id: String(Date.now()),
+      id: id,
       title: '',
       done: false,
     };
 
     setList((prevList) => [...prevList, newItem]);
+
+    setFocusId(id);
   };
 
   /**
@@ -73,11 +78,17 @@ export function useList() {
     );
   };
 
+  const clearFocus = () => {
+    setFocusId(null);
+  };
+
   return {
     list,
     createItem,
     setItemTitle,
     toggleItem,
     deleteItem,
+    focusId,
+    clearFocus,
   };
 }
