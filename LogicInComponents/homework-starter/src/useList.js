@@ -20,7 +20,15 @@ export function useList() {
   ]);
 
   /** Создать новый элемент. */
-  const createItem = () => {};
+  const createItem = () => {
+    const newItem = {
+      id: String(Date.now()),
+      title: '',
+      done: false,
+    };
+
+    setList((prevList) => [...prevList, newItem]);
+  };
 
   /**
    * Установить заголовок элемента.
