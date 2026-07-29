@@ -67,7 +67,11 @@ export function useList() {
    *
    * @param id - ID элемента.
    */
-  const deleteItem = (id) => {};
+  const deleteItem = (id) => {
+    setList((prevList) =>
+      prevList.filter((item) => item.id !== id)
+    );
+  };
 
   return {
     list,
