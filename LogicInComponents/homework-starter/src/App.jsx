@@ -3,7 +3,15 @@ import { useList } from './useList';
 import './App.css';
 
 export const App = () => {
-  const { list, createItem, setItemTitle, toggleItem, deleteItem, focusId, clearFocus } = useList();
+  const { 
+    list, 
+    createItem, 
+    setItemTitle, 
+    toggleItem, 
+    deleteItem, 
+    focusId, 
+    clearFocus, 
+  } = useList();
 
   return (
     <div className="app">

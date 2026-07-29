@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useAutoFocus } from './useAutoFocus.js';
 import './Card.css';
 
 export const Card = ({
@@ -19,10 +19,12 @@ export const Card = ({
     onToggle(id);
   };
 
-  const handleSubmit = (event) => {
+  const handleKeyDown = (event) => {
+  if (event.key === 'Enter') {
     event.preventDefault();
     onToggle(id);
-  };
+  }
+};
 
   const handleTitleBlur = () => {
     if (title === '') {
@@ -30,23 +32,19 @@ export const Card = ({
     }
   };
 
-  const inputRef = useRef(null);
-
-  useEffect(() => {
-    if (shouldFocus) {
-      inputRef.current?.focus();
-      clearFocus();
-    }
-  }, [shouldFocus]);
+  const inputRef = useAutoFocus(
+    shouldFocus,
+    clearFocus
+  );
 
   return (
-    <form className="card" onSubmit={handleSubmit}>
+    <div className="card">
       <input
         className="card__done"
         type="checkbox"
         checked={done}
         onChange={handleCheckboxChange}
-        tabIndex={-1}
+        onKeyDown={handleKeyDown}
       />
 
       <input
@@ -56,7 +54,8 @@ export const Card = ({
         value={title}
         onChange={handleTitleChange}
         onBlur={handleTitleBlur}
+        onKeyDown={handleKeyDown}
       />
-    </form>
+    </div>
   );
 };
