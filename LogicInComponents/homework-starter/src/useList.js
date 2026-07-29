@@ -1,18 +1,23 @@
+import { useState } from 'react';
+
 export function useList() {
-  const list = [
+  const [list, setList] = useState([
     {
       id: '1',
-      title: 'Cookies'
+      title: 'Cookies',
+      done: false,
     },
     {
       id: '2',
-      title: 'Apples'
+      title: 'Apples',
+      done: false,
     },
     {
       id: '3',
-      title: 'Nuts'
-    }
-  ];
+      title: 'Nuts',
+      done: false,
+    },
+  ]);
 
   /** Создать новый элемент. */
   const createItem = () => {};
@@ -23,7 +28,15 @@ export function useList() {
    * @param id - ID элемента.
    * @param title - Заголовок элемента.
    */
-  const setItemTitle = (id, title) => {};
+  const setItemTitle = (id, title) => {
+    setList((prevList) =>
+      prevList.map((item) =>
+        item.id === id
+          ? { ...item, title }
+          : item
+      )
+    );
+  };
 
   /**
    * Переключить выполненность элемента.
