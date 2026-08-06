@@ -57,7 +57,7 @@ notesRouter.post("/", async (req, res) => {
     return res.status(400).send(bodyParseResult.error.message);
   }
 
-  const { text, title } = bodyParseResult.data;
+  const { title, text } = bodyParseResult.data;
 
   const post = await Notes.create(title, text, userId);
 

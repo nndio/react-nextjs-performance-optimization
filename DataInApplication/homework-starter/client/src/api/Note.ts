@@ -1,10 +1,13 @@
 import { z } from "zod";
+import { useEffect, useState } from "react";
+import { validateResponse } from "./validateResponse";
 
 const NoteSchema = z.object({
     id: z.string(),
+    title: z.string(),
     text: z.string(),
-    authorId: z.string(),
-    createdAt: z.number(),
+    userId: z.string(),
+    createdAt: z.number()
 });
 
 export type Note = z.infer<typeof NoteSchema>;
@@ -12,3 +15,82 @@ export type Note = z.infer<typeof NoteSchema>;
 export const NoteList = z.array(NoteSchema);
 
 export type NoteList = z.infer<typeof NoteList>;
+
+export const FetchNoteListSchema = z.object({
+    list: NoteList,
+});
+
+type FetchNoteListResponse = z.infer<typeof FetchNoteListSchema>;
+
+export function fetchNoteList(): Promise<FetchNoteListResponse> {
+    return fetch("/api/notes")
+    .then(validateResponse)
+    .then((response) => response.json())
+    .then((data) => FetchNoteListSchema.parse(data));
+}
+
+interface IdleRequestState {
+    status: "idle";
+}
+
+interface LoadingRequestState {
+    status: "pending";
+}
+
+interface SuccesRequestState {
+    "status": "succes";
+    data: NoteList;
+}
+
+interface ErrorRequestState {
+    "status": "error";
+    error: unknown;
+}
+
+type RequestState = 
+    |IdleRequestState
+    |LoadingRequestState
+    |SuccesRequestState
+    |ErrorRequestState
+
+export function useNoteList() {
+    const [state, setState] = useState<RequestState>({ status: "idle" });
+    useEffect(() => {
+        if (state.status === "pending"){
+            fetchNoteList().then((data) => {
+                setState({ status: "succes", data: data.list });
+            })
+            .catch((error) => {
+  alert(String(error));
+  setState({ status: "error", error });
+});
+        }
+    }, [state]);
+
+    useEffect(() => {
+        setState({ status: "pending" });
+    }, []);
+
+    const refetch = () => {
+        setState({ status: "pending" });
+    };
+    return {
+        state,
+        refetch,
+    }
+}
+
+export function createNote(title: string, text: string): Promise<void> {
+    return fetch("api/notes", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            title,
+            text,
+        }),
+    })
+    .then(validateResponse)
+    .then(() => undefined);
+}

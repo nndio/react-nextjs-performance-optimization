@@ -20,3 +20,13 @@ usersRouter.get("/me", (req, res) => {
 
   res.status(200).json(user);
 });
+
+usersRouter.get("/:id", (req, res) => {
+  const user = Users.getOne(req.params.id);
+
+  if (!user) {
+    return res.status(404).send("Пользователь не найден");
+  }
+
+  res.status(200).json(user);
+});
