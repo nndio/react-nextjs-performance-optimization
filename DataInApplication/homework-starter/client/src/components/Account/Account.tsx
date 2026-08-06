@@ -4,10 +4,11 @@ import { Loader } from "../Loader";
 import { AuthForm } from "../AuthForm";
 import { NoteForm } from "../NoteForm";
 import { queryClient } from "../../api/queryClient";
+import { LogoutButton } from "../LogoutButton";
 
 export const Account = () => {
     const meQuery = useQuery({
-        queryFn: () => fetchMe,
+        queryFn: () => fetchMe(),
         queryKey: ["users", "me"],
     },
     queryClient
@@ -21,6 +22,11 @@ export const Account = () => {
             return <AuthForm />;
 
         case "success":
-            return <NoteForm />
+            return (
+                <>
+                <LogoutButton />
+                <NoteForm />
+                </>
+            );
     }
 }

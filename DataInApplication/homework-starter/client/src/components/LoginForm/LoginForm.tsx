@@ -46,7 +46,7 @@ export const LoginForm: FC = () => {
 
       {loginMutation.error && <span>{loginMutation.error.message}</span>}
 
-      <Button type="submit" title="Войти" isLoading={loginMutation.isPending} />
+      <Button type="submit" isLoading={loginMutation.isPending}>Войти</Button>
     </form>
   );
 };
