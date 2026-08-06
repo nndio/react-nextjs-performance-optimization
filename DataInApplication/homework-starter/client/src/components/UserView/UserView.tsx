@@ -1,14 +1,18 @@
+import { FC } from "react";
+import { User } from "../../api/User";
 import "./UserView.css";
 
-export const UserView = () => {
-  const username = "Firstname Lastname";
+interface UserViewProps {
+  user: User;
+}
 
-  return (
-    <div className="user-view">
+export const UserView: FC<UserViewProps> = ({ user }) => {
+ return (
+    <div>
       <div className="user-view__logo">
-        {username.slice(0, 1).toUpperCase()}
+        {user.username.slice(0, 1).toUpperCase()}
       </div>
-      <span className="user-view__name">{username}</span>
+      <span className="user-view__name">{user.username}</span>
     </div>
   );
 };

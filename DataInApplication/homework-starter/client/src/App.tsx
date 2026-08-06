@@ -1,10 +1,13 @@
 import "./App.css";
-import { AuthForm } from "./components/AuthForm";
+import { Account } from "./components/Account/Account";
+import { FetchNoteListView } from "./components/NotesListView/FetchNoteListView";
 
 function App() {
   return (
     <div className="app">
-      <AuthForm />
+      <Account />
+
+      <FetchNoteListView />
     </div>
   );
 }

@@ -57,6 +57,12 @@ authRouter.post("/login", (req, res) => {
   authorizeResponse(res, user.id).status(200).send();
 });
 
-authRouter.post("/logout", (req, res) => {
+/*authRouter.post("/logout", (req, res) => {
   unauthorizeResponse(res).status(200).send();
+});*/
+
+authRouter.post("/logout", (req, res) => {
+  res.clearCookie("auth");
+
+  res.status(200).send();
 });

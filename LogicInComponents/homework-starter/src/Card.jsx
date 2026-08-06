@@ -1,39 +1,61 @@
+import { useAutoFocus } from './useAutoFocus.js';
 import './Card.css';
 
 export const Card = ({
   id,
   title,
-  imageUrl,
-  price, 
-  discount
+  onTitleChange,
+  done,
+  onToggle,
+  onDelete,
+  shouldFocus,
+  clearFocus,
 }) => {
+  const handleTitleChange = (event) => {
+    onTitleChange(id, event.target.value);
+  };
 
-  const discountedPrice = discount ? Math.round(price * (1 - discount)) : price;
+  const handleCheckboxChange = () => {
+    onToggle(id);
+  };
+
+  const handleKeyDown = (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    onToggle(id);
+  }
+};
+
+  const handleTitleBlur = () => {
+    if (title === '') {
+      onDelete(id);
+    }
+  };
+
+  const inputRef = useAutoFocus(
+    shouldFocus,
+    clearFocus
+  );
 
   return (
-    <article className="product-card">
-      <img className="product-card__image" src={imageUrl} alt={title} />
+    <div className="card">
+      <input
+        className="card__done"
+        type="checkbox"
+        checked={done}
+        onChange={handleCheckboxChange}
+        onKeyDown={handleKeyDown}
+      />
 
-      <div className="product-card__price-container">
-        {discount ? (
-          <>
-            <span className="product-card__price product-card__price_with-discount">
-              {discountedPrice.toLocaleString()} ₽
-            </span>
-
-            <span className="product-card__price product-card__price_without-discount">
-              {price.toLocaleString()} ₽
-            </span>
-          </>
-        ) : (
-          <span className="product-card__price">
-            {price.toLocaleString()} ₽
-          </span>
-        )}
-      </div>
-
-      <h2 className="product-card__title">{title}</h2>
-    </article>
-
+      <input
+        ref={inputRef}
+        className="card__title"
+        type="text"
+        value={title}
+        onChange={handleTitleChange}
+        onBlur={handleTitleBlur}
+        onKeyDown={handleKeyDown}
+      />
+    </div>
   );
 };
