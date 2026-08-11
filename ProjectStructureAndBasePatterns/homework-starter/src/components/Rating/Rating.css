@@ -1,0 +1,22 @@
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.rating__button {
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.rating__star {
+  width: 20px;
+  height: 20px;
+  opacity: 0.35;
+}
+
+.rating__star--active {
+  opacity: 1;
+}
