@@ -4,7 +4,7 @@
       "id": "1",
       "name": "Mama's Kitchen",
       "description": "American, 4.7 stars",
-      "rating": 2,
+      "rating": 4,
       "url": "/mamas-kitchen.png"
     },
     {
@@ -25,7 +25,7 @@
       "id": "4",
       "name": "Taco Fiesta",
       "description": "American, 4.8 stars",
-      "rating": 4,
+      "rating": 5,
       "url": "/taco-fiesta.png"
     }
   ]

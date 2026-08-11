@@ -1,10 +1,15 @@
-import { Restaurant } from "../../types";
-import { Rating } from "../Rating/Rating";
+import { Restaurant } from "../../../types";
+
+import { Rating } from "../../../components/Rating/Rating";
+
 import "./RestaurantCard.css";
 
 type RestaurantCardProps = {
   restaurant: Restaurant;
-  onRatingChange: (restaurantId: string, rating: number) => void;
+  onRatingChange: (
+    restaurantId: string,
+    rating: number
+  ) => void;
 };
 
 export const RestaurantCard = ({
@@ -12,7 +17,10 @@ export const RestaurantCard = ({
   onRatingChange,
 }: RestaurantCardProps) => {
   const handleRatingChange = (rating: number) => {
-    onRatingChange(restaurant.id, rating);
+    onRatingChange(
+      restaurant.id,
+      rating
+    );
   };
 
   return (

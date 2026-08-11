@@ -1,4 +1,5 @@
 import StarIcon from "../../assets/star.svg?react";
+
 import "./Rating.css";
 
 type RatingProps = {
@@ -6,9 +7,15 @@ type RatingProps = {
   onChange: (value: number) => void;
 };
 
-export const Rating = ({ value, onChange }: RatingProps) => {
+export const Rating = ({
+  value,
+  onChange,
+}: RatingProps) => {
   return (
-    <div className="rating">
+    <div
+      className="rating"
+      aria-label={`Rating: ${value} out of 5`}
+    >
       {[1, 2, 3, 4, 5].map((star) => (
         <button
           key={star}

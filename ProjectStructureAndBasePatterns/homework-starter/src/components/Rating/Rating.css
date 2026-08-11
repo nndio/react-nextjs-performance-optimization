@@ -5,18 +5,27 @@
 }
 
 .rating__button {
+  display: flex;
+
   padding: 0;
+
   border: none;
   background: transparent;
+
   cursor: pointer;
 }
 
 .rating__star {
   width: 20px;
   height: 20px;
-  opacity: 0.35;
+
+  opacity: 0.3;
 }
 
 .rating__star--active {
   opacity: 1;
+}
+
+.rating__button:hover .rating__star {
+  opacity: 0.8;
 }
