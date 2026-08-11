@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { Avatar } from './components/Avatar/Avatar';
 import { Logo } from './components/Logo/Logo';
+import { Search } from './components/Search/Search';
 import './styles.css';
 
 
 function App() {
+  const [search, setSearch] = useState("");
   return (
     <>
       <header>
@@ -11,7 +14,10 @@ function App() {
         <Avatar />
       </header>
       <main>
-        <input placeholder="Search for restaurants" />
+        <Search
+          value={search}
+          onChange={setSearch}
+        />
         <section></section>
       </main>
       <footer>
