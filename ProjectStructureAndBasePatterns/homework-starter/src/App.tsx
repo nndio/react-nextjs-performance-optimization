@@ -1,30 +1,77 @@
-import StarIcon from './assets/star.svg?react'
-import LogoIcon from './assets/stair.svg?react'
-import './styles.css'
+import { useState } from "react";
+
+import { useRestaurants } from "./hooks/useRestaurants";
+
+import { Logo } from "./components/Logo/Logo";
+import { Avatar } from "./components/Avatar/Avatar";
+import { Search } from "./components/Search/Search";
+
+import { RestaurantList } from "./features/restaurants/RestaurantList/RestaurantList";
+
+import "./styles.css";
 
 function App() {
+  const {
+    restaurants,
+    isLoading,
+    error,
+    changeRating,
+  } = useRestaurants();
+
+  const [search, setSearch] = useState("");
+
+  const filteredRestaurants = restaurants.filter(
+    (restaurant) =>
+      restaurant.name
+        .toLowerCase()
+        .includes(search.toLowerCase())
+  );
+
   return (
-    <>
-      <header>
-        <div className="logo">
-          <LogoIcon width={16} height={16} className="logo__icon" />
-          <span>Eats</span>
-        </div>
-        <div className="profile">
-          <img alt="profile" src="/avatar.png" />
-        </div>
+    <div className="page">
+      <header className="header">
+        <Logo />
+
+        <Avatar />
       </header>
-      <main>
-        <input placeholder="Search for restaurants" />
-        <section></section>
+
+      <main className="main">
+        <Search
+          value={search}
+          onChange={setSearch}
+        />
+
+        {isLoading && (
+          <div className="loading">
+            Loading...
+          </div>
+        )}
+
+        {error && (
+          <div className="error">
+            {error}
+          </div>
+        )}
+
+        {!isLoading && !error && (
+          <RestaurantList
+            restaurants={filteredRestaurants}
+            onRatingChange={changeRating}
+          />
+        )}
       </main>
-      <footer>
+
+      <footer className="footer">
         <p>Privacy Policy</p>
-        <p className="corporation">2022 Eats</p>
-        <p>Terms Of Service</p>
+
+        <p className="footer__copyright">
+          © 2022 Eats
+        </p>
+
+        <p>Terms of Service</p>
       </footer>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
