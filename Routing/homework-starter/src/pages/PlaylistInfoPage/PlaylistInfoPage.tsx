@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { PLAYLISTS } from "../../data";
 import "./PlaylistInfoPage.css";
 
@@ -23,9 +23,14 @@ export function PlaylistInfoPage() {
 
     return (
         <div className="playlistInfoPage">
-            <h2>{playlist.name}</h2>
+            <p>
+                Жанр:{" "}
+                <Link to={`/playlists?searchGenre=${playlist.genre.toLowerCase()}`}>
+                    {playlist.genre}
+                </Link>
+            </p>
 
-            <p>{playlist.genre}</p>
+            <h2>Название: {playlist.name}</h2>
 
             <ul className="songs">
                 {playlist.songs.map((song, index) => (

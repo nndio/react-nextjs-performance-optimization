@@ -9,12 +9,20 @@ export function PlaylistsPage() {
     
     const handleSearchName = (event: ChangeEvent<HTMLInputElement>): void => {
         const { value } = event.target;
-        setSearchParam({ searchName: value.toLowerCase() });
+
+        setSearchParam((params) => {
+            params.set("searchName", value.toLowerCase());
+            return params;
+        });
     };
 
     const handleSearchGenre = (event: ChangeEvent<HTMLInputElement>): void => {
         const { value } = event.target;
-        setSearchParam({ searchGenre: value.toLowerCase() });
+
+        setSearchParam((params) => {
+            params.set("searchGenre", value.toLowerCase());
+            return params;
+        });
     };
 
     const searchName = searchParam.get("searchName") || "";
