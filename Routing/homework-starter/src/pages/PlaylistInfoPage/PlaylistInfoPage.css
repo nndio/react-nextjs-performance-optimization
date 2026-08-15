@@ -1,0 +1,11 @@
+.playlistInfoPage {
+	color: darkcyan;
+}
+
+.songs {
+	list-style-type: "- ";
+}
+
+.songs hr {
+	opacity: 0.5;
+}
