@@ -1,0 +1,17 @@
+import { Space } from "antd";
+import Api from "../../api/api";
+import Todo from "../Todo/Todo";
+
+const TodosList = async () => {
+	const data = await Api.getTodos();
+
+	return (
+		<Space direction="vertical" size="middle" style={{ display: "flex" }}>
+			{data.map((todo) => (
+				<Todo todo={todo} key={todo.id} />
+			))}
+		</Space>
+	);
+};
+
+export default TodosList;
